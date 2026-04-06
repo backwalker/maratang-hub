@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+html {
+  font-size: 18px; /* 20px에서 18px로 살짝 축소 */
+}
+:root {
+  /* Color Palette - Blue & White Theme */
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-light: #eff6ff;
+  --color-background: #f1f5f9;
+  --color-surface: rgba(255, 255, 255, 0.85); /* Glassmorphism base */
+  --color-surface-solid: #ffffff;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  
+  /* Status Colors */
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  
+  /* Layout */
+  --sidebar-width: 260px;
+  --topbar-height: 70px;
+  
+  /* Shadows & Radius */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  
+  /* Responsive Typography & Spacing */
+  --font-size-base: clamp(14px, 2vw, 18px);
+  --padding-page: clamp(1rem, 3vw, 2.5rem);
+  --gap-grid: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+html {
+  font-size: var(--font-size-base);
+}
+
+/* Mobile-Specific Scrollbars (Chrome/Safari/Samsung) */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+/* Global Mobile Fixes */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--color-background);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0; /* Prevents flex items from expanding beyond parent */
+}
+
+.page-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--padding-page);
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+}
+
+/* --- Responsive Utilities --- */
+
+/* 1. Grid Auto-Fit: For Dashboards & Lists */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: var(--gap-grid);
+}
+
+/* 2. Mobile Table Card: For Inventory/Ledger */
+@media (max-width: 768px) {
+  .mobile-table-card table, 
+  .mobile-table-card thead, 
+  .mobile-table-card tbody, 
+  .mobile-table-card th, 
+  .mobile-table-card td, 
+  .mobile-table-card tr {
+    display: block;
+  }
+  
+  .mobile-table-card thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  .mobile-table-card tr {
+    margin-bottom: 1rem;
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    padding: 0.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .mobile-table-card td {
+    border: none;
+    position: relative;
+    padding-left: 50% !important;
+    text-align: right !important;
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .mobile-table-card td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 1rem;
+    width: 45%;
+    text-align: left;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+}
+
+/* 3. Navigation Adaptivity (Flip vs Fold) */
+@media (max-width: 480px) {
+  /* Extra narrow (Fold External) */
+  .grid-responsive {
+    grid-template-columns: 1fr;
+  }
+}
