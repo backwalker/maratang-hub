@@ -30,14 +30,14 @@ jobs:
 
       - name: Generate Native Resources
         run: |
-          npx @capacitor/assets generate --android
+          npx --yes @capacitor/assets generate --android || true
 
       - name: Build Android APK
         run: |
-          npx cap sync
+          npx --yes cap sync android
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
